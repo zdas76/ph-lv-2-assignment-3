@@ -1,11 +1,13 @@
-const createUserInToDB = () => {};
-const getAllUserFromBD = () => {};
-const getOneUserFromDB = () => {};
-const updateUsertoDB = () => {};
+import { TUser } from "../user/user.interfact";
+import { User } from "../user/user.model";
 
-export const UserService = {
+const createUserInToDB = async (payLoad: TUser) => {
+  const result = await User.create(payLoad);
+  return result;
+};
+const loginUser = () => {};
+
+export const AuthService = {
   createUserInToDB,
-  getAllUserFromBD,
-  getOneUserFromDB,
-  updateUsertoDB,
+  loginUser,
 };

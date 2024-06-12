@@ -9,7 +9,7 @@ const userSchema = new Schema<TUser>(
       trim: true,
       minlength: [5, "Name required minimum 5 characters"],
     },
-    email: { type: String, required: [true, "Emain Required"] },
+    email: { type: String, required: [true, "Emain Required"], unique: true },
     password: { type: String, required: [true, "Password Required"] },
     phone: { type: String, required: [true, "Phone number is required"] },
     role: { type: String, enum: ["admin", "user"], default: "user" },
