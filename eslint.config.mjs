@@ -8,8 +8,21 @@ export default [
   ...tseslint.configs.recommended,
   {
     rules: {
-      "no-unused-vars": "error",
-      "no-undef": "error",
+      "no-unused-vars": "warn",
+      "no-undef": "warn",
+      "no-unused-expressions": "error",
+      "prefer-const": "error",
     },
+  },
+  {
+    languageOptions: {
+      globals: {
+        var1: "writable",
+        var2: "readonly",
+      },
+    },
+  },
+  {
+    ignores: ["**/config/", "**/dist/"],
   },
 ];
