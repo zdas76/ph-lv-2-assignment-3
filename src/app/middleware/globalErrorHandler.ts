@@ -9,6 +9,7 @@ import { TErrorSources } from "../interface/error";
 import config from "../config";
 
 const globalErrorHandaler: ErrorRequestHandler = (error, req, res, next) => {
+  console.log(error);
   let statusCode = 500;
   let message = "Something went wrong";
   let errorSources: TErrorSources = [

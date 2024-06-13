@@ -1,0 +1,42 @@
+import httpStatus from "http-status";
+import AppError from "../../error/AppError";
+import { TService } from "./service.interface";
+import { Service } from "./service.model";
+
+const createServiceInToDB = async (payLoad: TService) => {
+  const isExsistService = await Service.findOne({ name: payLoad.name });
+
+  if (isExsistService) {
+    throw new AppError(httpStatus.BAD_REQUEST, "This name already used");
+  }
+  const result = await Service.create(payLoad);
+  return result;
+};
+
+const getAllServiceFromDB = async () => {
+  const result = await Service.find();
+  return result;
+};
+
+const getOneServiceFromDB = async (id: string) => {
+  const result = await Service.findOne({ _id: id });
+  return result;
+};
+
+const updateServiceToDB = async (id: string, payLoad: number) => {
+  console.log(payLoad);
+  const isServiceExists = await Service.findOne({ _id: id });
+  if (!isServiceExists) {
+    throw new AppError(httpStatus.NOT_FOUND, "Not found any product");
+  }
+  const result = await Service.findOneAndUpdate({ _id: id }, { payLoad });
+  console.log(result);
+  return result;
+};
+
+export const ServiceofService = {
+  createServiceInToDB,
+  getAllServiceFromDB,
+  getOneServiceFromDB,
+  updateServiceToDB,
+};

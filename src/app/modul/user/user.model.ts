@@ -10,7 +10,10 @@ const userSchema = new Schema<TUser>(
       minlength: [5, "Name required minimum 5 characters"],
     },
     email: { type: String, required: [true, "Emain Required"], unique: true },
-    password: { type: String, required: [true, "Password Required"] },
+    password: {
+      type: String,
+      required: [true, "Password Required"],
+    },
     phone: { type: String, required: [true, "Phone number is required"] },
     role: { type: String, enum: ["admin", "user"], default: "user" },
     address: {
@@ -18,7 +21,16 @@ const userSchema = new Schema<TUser>(
       minlength: [10, "Address required minimum 50 characters"],
     },
   },
-  { timestamps: true }
+  {
+    toJSON: {
+      transform: function (doc, ret) {
+        delete ret.password;
+        return ret;
+      },
+    },
+
+    timestamps: true,
+  }
 );
 
 export const User = model("User", userSchema);
