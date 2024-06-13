@@ -23,14 +23,16 @@ const getOneServiceFromDB = async (id: string) => {
   return result;
 };
 
-const updateServiceToDB = async (id: string, payLoad: number) => {
-  console.log(payLoad);
+const updateServiceToDB = async (id: string, payLoad: Partial<TService>) => {
   const isServiceExists = await Service.findOne({ _id: id });
   if (!isServiceExists) {
     throw new AppError(httpStatus.NOT_FOUND, "Not found any product");
   }
-  const result = await Service.findOneAndUpdate({ _id: id }, { payLoad });
-  console.log(result);
+  const result = await Service.findOneAndUpdate(
+    { _id: id },
+    { price: payLoad.price }
+  );
+
   return result;
 };
 

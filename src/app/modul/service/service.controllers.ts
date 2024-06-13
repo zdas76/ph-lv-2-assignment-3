@@ -39,6 +39,7 @@ const getOneService = catchAsync(async (req, res) => {
 
 const updateService = catchAsync(async (req, res) => {
   const { id } = req.params;
+
   const result = await ServiceofService.updateServiceToDB(id, req.body);
 
   sendResponse(res, {

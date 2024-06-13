@@ -15,6 +15,10 @@ routes.get("/", ServiceControllers.getAllService);
 
 routes.get("/:id", ServiceControllers.getOneService);
 
-routes.put("/:id", ServiceControllers.updateService);
+routes.put(
+  "/:id",
+  validationRequest(ServiceValidation.updateServiceValidation),
+  ServiceControllers.updateService
+);
 
 export const ServiceRoutes = routes;
