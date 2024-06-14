@@ -36,9 +36,24 @@ const updateServiceToDB = async (id: string, payLoad: Partial<TService>) => {
   return result;
 };
 
+const deleteServiceToDB = async (id: string) => {
+  const isServiceExists = await Service.findOne({ _id: id });
+  if (!isServiceExists) {
+    throw new AppError(httpStatus.NOT_FOUND, "Service Not found");
+  }
+  const result = await Service.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    { new: true }
+  );
+
+  return result;
+};
+
 export const ServiceofService = {
   createServiceInToDB,
   getAllServiceFromDB,
   getOneServiceFromDB,
   updateServiceToDB,
+  deleteServiceToDB,
 };

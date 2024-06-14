@@ -12,6 +12,7 @@ const createServiceValidation = z.object({
 const updateServiceValidation = z.object({
   body: z.object({
     price: z.number().optional(),
+    isDeleted: z.boolean().optional(),
   }),
 });
 

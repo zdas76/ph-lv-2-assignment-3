@@ -11,7 +11,7 @@ const timeStringSchema = z.string().refine(
   }
 );
 
-const slotSchema = z.object({
+const slotSchemaZodValidation = z.object({
   body: z.object({
     service: z.string(),
     date: z.date(),
@@ -20,3 +20,7 @@ const slotSchema = z.object({
     isBooked: z.array(z.enum({ ...IsBooked } as [string, ...string[]])),
   }),
 });
+
+export const slotSchemaValidation = {
+  slotSchemaZodValidation,
+};

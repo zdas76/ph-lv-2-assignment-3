@@ -11,6 +11,12 @@ routes.post(
   ServiceControllers.createService
 );
 
+routes.post(
+  "/slots",
+  validationRequest(ServiceValidation.createServiceValidation),
+  ServiceControllers.createService
+);
+
 routes.get("/", ServiceControllers.getAllService);
 
 routes.get("/:id", ServiceControllers.getOneService);
@@ -20,5 +26,7 @@ routes.put(
   validationRequest(ServiceValidation.updateServiceValidation),
   ServiceControllers.updateService
 );
+
+routes.delete("/:id", ServiceControllers.deleteService);
 
 export const ServiceRoutes = routes;
