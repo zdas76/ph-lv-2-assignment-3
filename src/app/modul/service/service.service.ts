@@ -58,7 +58,6 @@ const createSlotInToDB = async (payLoad: TSlot) => {
     _id: payLoad.service,
     date: payLoad.date,
   });
-  console.log(isExsistService);
 
   if (isExsistService) {
     throw new AppError(httpStatus.BAD_REQUEST, `This slot are created of date`);

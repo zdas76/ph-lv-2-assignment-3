@@ -1,15 +1,19 @@
 import { z } from "zod";
 import { vehicleType } from "./booking.constant";
 
-const bookignValidation = z.object({
+const createBookignValidation = z.object({
   body: z.object({
     customer: z.string(),
-    service: z.string(),
-    slot: z.string(),
-    vehicleType: z.array(z.enum([...vehicleType] as [string, ...string[]])),
+    serviceId: z.string(),
+    slotId: z.string(),
+    vehicleType: z.string(z.enum([...vehicleType] as [string, ...string[]])),
+    vehicleBrand: z.string(),
+    vehicleModel: z.string(),
+    manufacturingYear: z.number(),
+    registrationPlate: z.string(),
   }),
-  vehicleBrand: z.string(),
-  vehicleModel: z.string(),
-  manufacturingYear: z.date(),
-  registrationPlate: z.string(),
 });
+
+export const BookingValidation = {
+  createBookignValidation,
+};

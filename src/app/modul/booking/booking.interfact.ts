@@ -2,8 +2,8 @@ import { Types } from "mongoose";
 
 export type TBookign = {
   customer: Types.ObjectId;
-  service: Types.ObjectId;
-  slot: Types.ObjectId;
+  serviceId: Types.ObjectId;
+  slotId: Types.ObjectId;
   vehicleType:
     | "car"
     | "SUV"
@@ -16,6 +16,6 @@ export type TBookign = {
     | "tractor";
   vehicleBrand: string;
   vehicleModel: string;
-  manufacturingYear: Date;
+  manufacturingYear: number;
   registrationPlate: string;
 };

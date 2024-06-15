@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { TUser } from "./auth.interfact";
+import { TUser } from "../user/user.interfact";
 
 const userSchema = new Schema<TUser>(
   {
