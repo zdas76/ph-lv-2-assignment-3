@@ -15,6 +15,7 @@ const createBooking = catchAsync(async (req, res) => {
 });
 
 const getAllBooking = catchAsync(async (req, res) => {
+  console.log("first", req.user);
   const result = await BookingService.getAllBooking();
 
   sendResponse(res, {
