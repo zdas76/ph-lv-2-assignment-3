@@ -2,6 +2,7 @@ import express from "express";
 import validationRequest from "../../middleware/validationRequest";
 import { ServiceValidation } from "./service.validation";
 import { ServiceControllers } from "./service.controllers";
+import { slotSchemaValidation } from "../slot/slot.validation";
 
 const routes = express.Router();
 
@@ -13,8 +14,8 @@ routes.post(
 
 routes.post(
   "/slots",
-  validationRequest(ServiceValidation.createServiceValidation),
-  ServiceControllers.createService
+  validationRequest(slotSchemaValidation.slotSchemaZodValidation),
+  ServiceControllers.createSlots
 );
 
 routes.get("/", ServiceControllers.getAllService);

@@ -1,4 +1,4 @@
-import { Schema, Types } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 import { TSlot } from "./slot.interface";
 
 const slotSchema = new Schema<TSlot>(
@@ -17,3 +17,5 @@ const slotSchema = new Schema<TSlot>(
     timestamps: true,
   }
 );
+
+export const Slots = model("Slots", slotSchema);

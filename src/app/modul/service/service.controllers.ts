@@ -3,6 +3,7 @@ import sendResponse from "../../Utiles/sendResponst";
 import catchAsync from "../../middleware/catchAsync";
 import { ServiceofService } from "./service.service";
 
+// Create Service
 const createService = catchAsync(async (req, res) => {
   const result = await ServiceofService.createServiceInToDB(req.body);
 
@@ -10,6 +11,18 @@ const createService = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     success: true,
     message: "Service created successfully",
+    data: result,
+  });
+});
+
+// Create Slots
+const createSlots = catchAsync(async (req, res) => {
+  const result = await ServiceofService.createSlotInToDB(req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Slots created successfully",
     data: result,
   });
 });
@@ -65,6 +78,7 @@ const deleteService = catchAsync(async (req, res) => {
 
 export const ServiceControllers = {
   createService,
+  createSlots,
   getAllService,
   getOneService,
   updateService,

@@ -2,6 +2,9 @@ import httpStatus from "http-status";
 import AppError from "../../error/AppError";
 import { TService } from "./service.interface";
 import { Service } from "./service.model";
+import { Slots } from "../slot/slot.model";
+import { TSlot } from "../slot/slot.interface";
+import { generateTimeSlots } from "./service.utils";
 
 const createServiceInToDB = async (payLoad: TService) => {
   const isExsistService = await Service.findOne({ name: payLoad.name });
@@ -50,10 +53,44 @@ const deleteServiceToDB = async (id: string) => {
   return result;
 };
 
+const createSlotInToDB = async (payLoad: TSlot) => {
+  const isExsistService = await Service.findOne({
+    _id: payLoad.service,
+    date: payLoad.date,
+  });
+  console.log(isExsistService);
+
+  if (isExsistService) {
+    throw new AppError(httpStatus.BAD_REQUEST, `This slot are created of date`);
+  }
+  const slotDuration = 60;
+
+  const slots = await generateTimeSlots(
+    payLoad.startTime,
+    payLoad.endTime,
+    slotDuration
+  );
+
+  const data = slots.map(
+    (slot) =>
+      new Object({
+        service: payLoad.service,
+        date: payLoad.date,
+        startTime: slot.startTime,
+        endTime: slot.endTime,
+        isBooked: payLoad.isBooked,
+      })
+  );
+
+  const result = await Slots.create(data);
+  return result;
+};
+
 export const ServiceofService = {
   createServiceInToDB,
   getAllServiceFromDB,
   getOneServiceFromDB,
   updateServiceToDB,
   deleteServiceToDB,
+  createSlotInToDB,
 };

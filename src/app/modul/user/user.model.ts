@@ -15,7 +15,7 @@ const userSchema = new Schema<TUser>(
       required: [true, "Password Required"],
     },
     phone: { type: String, required: [true, "Phone number is required"] },
-    role: { type: String, enum: ["admin", "user"], default: "user" },
+    role: { type: String, enum: ["admin", "user"], default: "user", select: 0 },
     address: {
       type: String,
       minlength: [10, "Address required minimum 50 characters"],
