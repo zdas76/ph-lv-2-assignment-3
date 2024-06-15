@@ -61,7 +61,7 @@ const createSlotInToDB = (payLoad) => __awaiter(void 0, void 0, void 0, function
     const slotDuration = 60;
     const slots = yield (0, service_utils_1.generateTimeSlots)(payLoad.startTime, payLoad.endTime, slotDuration);
     const data = slots.map((slot) => new Object({
-        service: payLoad.serviceId,
+        serviceId: payLoad.serviceId,
         date: payLoad.date,
         startTime: slot.startTime,
         endTime: slot.endTime,

@@ -20,6 +20,7 @@ const booking_model_1 = require("./booking.model");
 const service_model_1 = require("../service/service.model");
 const mongoose_1 = __importDefault(require("mongoose"));
 const createBooking = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    //   payload.customer = userId;
     const session = yield mongoose_1.default.startSession();
     try {
         session.startTransaction();
@@ -35,6 +36,7 @@ const createBooking = (payload) => __awaiter(void 0, void 0, void 0, function* (
         if (!updateSlotStatus) {
             throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Failed to creat booking!");
         }
+        console.log(payload);
         const newBooking = yield booking_model_1.Booking.create([payload], { session });
         if (!newBooking) {
             throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Failed to creat booking!");

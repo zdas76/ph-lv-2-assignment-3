@@ -18,6 +18,7 @@ const sendResponst_1 = __importDefault(require("../../Utiles/sendResponst"));
 const catchAsync_1 = __importDefault(require("../../middleware/catchAsync"));
 const booking_service_1 = require("./booking.service");
 const createBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.user);
     const result = yield booking_service_1.BookingService.createBooking(req.body);
     (0, sendResponst_1.default)(res, {
         statusCode: http_status_1.default.OK,

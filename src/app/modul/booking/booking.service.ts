@@ -7,6 +7,8 @@ import { Service } from "../service/service.model";
 import mongoose from "mongoose";
 
 const createBooking = async (payload: TBookign) => {
+  //   payload.customer = userId;
+
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
@@ -33,7 +35,7 @@ const createBooking = async (payload: TBookign) => {
     if (!updateSlotStatus) {
       throw new AppError(httpStatus.NOT_FOUND, "Failed to creat booking!");
     }
-
+    console.log(payload);
     const newBooking = await Booking.create([payload], { session });
     if (!newBooking) {
       throw new AppError(httpStatus.NOT_FOUND, "Failed to creat booking!");

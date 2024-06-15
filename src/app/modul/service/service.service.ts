@@ -73,7 +73,7 @@ const createSlotInToDB = async (payLoad: TSlot) => {
   const data = slots.map(
     (slot) =>
       new Object({
-        service: payLoad.serviceId,
+        serviceId: payLoad.serviceId,
         date: payLoad.date,
         startTime: slot.startTime,
         endTime: slot.endTime,

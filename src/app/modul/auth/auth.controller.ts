@@ -19,11 +19,11 @@ const loginUser = catchAsync(async (req, res) => {
 
   // const newData = data;
 
-  sendResponse(res, {
+  res.status(httpStatus.OK).json({
     success: true,
-    statusCode: httpStatus.OK,
     message: "User registered successfully",
-    data: result,
+    token: result.token,
+    data: result.user,
   });
 });
 

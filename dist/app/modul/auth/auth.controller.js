@@ -29,11 +29,11 @@ const createUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield auth_service_1.AuthService.loginUser(req.body);
     // const newData = data;
-    (0, sendResponst_1.default)(res, {
+    res.status(http_status_1.default.OK).json({
         success: true,
-        statusCode: http_status_1.default.OK,
         message: "User registered successfully",
-        data: result,
+        token: result.token,
+        data: result.user,
     });
 }));
 exports.AotuControllers = {

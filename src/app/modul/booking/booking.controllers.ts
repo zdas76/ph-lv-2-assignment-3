@@ -4,6 +4,7 @@ import catchAsync from "../../middleware/catchAsync";
 import { BookingService } from "./booking.service";
 
 const createBooking = catchAsync(async (req, res) => {
+  console.log(req.user);
   const result = await BookingService.createBooking(req.body);
 
   sendResponse(res, {

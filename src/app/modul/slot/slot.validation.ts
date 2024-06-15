@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { IsBooked } from "./slot.constant";
 
 const timeStringSchema = z.string().refine(
   (time) => {

@@ -5,7 +5,6 @@ const zod_1 = require("zod");
 const booking_constant_1 = require("./booking.constant");
 const createBookignValidation = zod_1.z.object({
     body: zod_1.z.object({
-        customer: zod_1.z.string(),
         serviceId: zod_1.z.string(),
         slotId: zod_1.z.string(),
         vehicleType: zod_1.z.string(zod_1.z.enum([...booking_constant_1.vehicleType])),
