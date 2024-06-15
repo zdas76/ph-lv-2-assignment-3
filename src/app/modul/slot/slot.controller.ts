@@ -4,12 +4,12 @@ import { SlotServices } from "./slot.service";
 import sendResponse from "../../Utiles/sendResponst";
 
 const gerAllSlots = catchAsync(async (req, res) => {
-  const result = await SlotServices.getAllSlotsFromBD();
+  const result = await SlotServices.getAllSlotsFromBD(req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Service created successfully",
+    message: "Available slots retrieved successfully",
     data: result,
   });
 });

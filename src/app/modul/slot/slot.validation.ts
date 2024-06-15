@@ -14,7 +14,7 @@ const timeStringSchema = z.string().refine(
 const slotSchemaZodValidation = z.object({
   body: z
     .object({
-      service: z.string(),
+      serviceId: z.string(),
       date: z.string().date(),
       startTime: timeStringSchema,
       endTime: timeStringSchema,

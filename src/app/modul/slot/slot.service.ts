@@ -1,9 +1,9 @@
 import { Slots } from "./slot.model";
 
-const getAllSlotsFromBD = async () => {
-  const result = await Slots.find({ isBooked: { $ne: "booked" } }).populate(
-    "service"
-  );
+const getAllSlotsFromBD = async (query: Record<string, unknown>) => {
+  const result = await Slots.find({
+    $or: [{ date: query.date }, { serviceId: query.serviceId }],
+  }).populate("serviceId");
   return result;
 };
 
