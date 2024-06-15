@@ -11,8 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SlotServices = void 0;
 const slot_model_1 = require("./slot.model");
-const getAllSlotsFromBD = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield slot_model_1.Slots.find({ isBooked: { $ne: "booked" } }).populate("service");
+const getAllSlotsFromBD = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield slot_model_1.Slots.find({
+        $or: [{ date: query.date }, { serviceId: query.serviceId }],
+    }).populate("serviceId");
     return result;
 });
 exports.SlotServices = {

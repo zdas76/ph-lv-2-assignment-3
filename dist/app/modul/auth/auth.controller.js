@@ -20,8 +20,8 @@ const auth_service_1 = require("./auth.service");
 const createUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield auth_service_1.AuthService.createUserInToDB(req.body);
     (0, sendResponst_1.default)(res, {
-        statusCode: http_status_1.default.OK,
         success: true,
+        statusCode: http_status_1.default.OK,
         message: "User registered successfully",
         data: result,
     });
@@ -30,8 +30,8 @@ const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
     const result = yield auth_service_1.AuthService.loginUser(req.body);
     // const newData = data;
     (0, sendResponst_1.default)(res, {
-        statusCode: http_status_1.default.OK,
         success: true,
+        statusCode: http_status_1.default.OK,
         message: "User registered successfully",
         data: result,
     });

@@ -39,13 +39,14 @@ const loginUser = (payLoad) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const jwtPayload = {
         name: user.name,
+        email: user.email,
         role: user.role,
     };
     const token = jsonwebtoken_1.default.sign(jwtPayload, config_1.default.access_secret, {
         expiresIn: "30m",
     });
     return {
-        token,
+        token: `Bearer ${token}`,
         user,
     };
 });

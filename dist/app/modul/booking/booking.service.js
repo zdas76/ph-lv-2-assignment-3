@@ -16,24 +16,47 @@ exports.BookingService = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const AppError_1 = __importDefault(require("../../error/AppError"));
 const slot_model_1 = require("../slot/slot.model");
+const booking_model_1 = require("./booking.model");
 const service_model_1 = require("../service/service.model");
 const mongoose_1 = __importDefault(require("mongoose"));
 const createBooking = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const checkService = yield service_model_1.Service.findById(payload.serviceId);
-    if (!checkService) {
-        throw new AppError_1.default(http_status_1.default.NOT_FOUND, `Service is not found`);
-    }
-    const sloteStatus = yield slot_model_1.Slots.findById(payload.slotId);
-    if ((sloteStatus === null || sloteStatus === void 0 ? void 0 : sloteStatus.isBooked) === "booked") {
-        throw new AppError_1.default(http_status_1.default.NOT_ACCEPTABLE, `${checkService.name} is not avaible at this time. Please chose others`);
-    }
     const session = yield mongoose_1.default.startSession();
     try {
+        session.startTransaction();
+        const checkService = yield service_model_1.Service.findById(payload.serviceId);
+        if (!checkService) {
+            throw new AppError_1.default(http_status_1.default.NOT_FOUND, `Service is not found`);
+        }
+        const sloteStatus = yield slot_model_1.Slots.findById(payload.slotId);
+        if ((sloteStatus === null || sloteStatus === void 0 ? void 0 : sloteStatus.isBooked) === "booked") {
+            throw new AppError_1.default(http_status_1.default.NOT_ACCEPTABLE, `${checkService.name} is not avaible at this time. Please chose others`);
+        }
+        const updateSlotStatus = yield slot_model_1.Slots.findOneAndUpdate({ _id: payload.slotId }, { isBooked: "booked" }, { session, new: true });
+        if (!updateSlotStatus) {
+            throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Failed to creat booking!");
+        }
+        const newBooking = yield booking_model_1.Booking.create([payload], { session });
+        if (!newBooking) {
+            throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Failed to creat booking!");
+        }
+        yield session.commitTransaction();
+        yield session.endSession();
+        return newBooking;
     }
-    catch (error) { }
-    //   const result = await Booking.create(payload);
-    //   return result;
+    catch (error) {
+        yield session.abortTransaction();
+        yield session.endSession();
+        throw new Error(error);
+    }
+});
+const getAllBooking = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_model_1.Booking.find()
+        .populate("customer")
+        .populate("serviceId")
+        .populate("slotId");
+    return result;
 });
 exports.BookingService = {
     createBooking,
+    getAllBooking,
 };

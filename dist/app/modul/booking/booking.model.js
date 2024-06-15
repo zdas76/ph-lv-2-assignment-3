@@ -7,20 +7,18 @@ const bookingSchema = new mongoose_1.Schema({
     customer: {
         type: mongoose_1.Schema.Types.ObjectId,
         required: [true, "Customer id is required"],
-        unique: true,
         ref: "User",
     },
     serviceId: {
         type: mongoose_1.Schema.Types.ObjectId,
         required: [true, "Service id is requried"],
         ref: "Service",
-        unique: true,
     },
     slotId: {
         type: mongoose_1.Schema.Types.ObjectId,
         required: [true, "Slot is required"],
         unique: true,
-        ref: "Slot",
+        ref: "Slots",
     },
     vehicleType: {
         type: String,

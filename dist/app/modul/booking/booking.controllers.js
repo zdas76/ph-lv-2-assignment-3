@@ -26,12 +26,27 @@ const createBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         data: result,
     });
 }));
-// sendResponse(res, {
-//   statusCode: httpStatus.OK,
-//   success: true,
-//   message: "Service created successfully",
-//   data: result,
-// });
+const getAllBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("first", req.user);
+    const result = yield booking_service_1.BookingService.getAllBooking();
+    (0, sendResponst_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: "Service created successfully",
+        data: result,
+    });
+}));
+const getMyBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_service_1.BookingService.getAllBooking();
+    (0, sendResponst_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: "Service created successfully",
+        data: result,
+    });
+}));
 exports.BookingController = {
     createBooking,
+    getAllBooking,
+    getMyBooking,
 };

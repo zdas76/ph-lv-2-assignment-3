@@ -52,7 +52,7 @@ const deleteServiceToDB = (id) => __awaiter(void 0, void 0, void 0, function* ()
 });
 const createSlotInToDB = (payLoad) => __awaiter(void 0, void 0, void 0, function* () {
     const isExsistService = yield service_model_1.Service.findOne({
-        _id: payLoad.service,
+        _id: payLoad.serviceId,
         date: payLoad.date,
     });
     if (isExsistService) {
@@ -61,7 +61,7 @@ const createSlotInToDB = (payLoad) => __awaiter(void 0, void 0, void 0, function
     const slotDuration = 60;
     const slots = yield (0, service_utils_1.generateTimeSlots)(payLoad.startTime, payLoad.endTime, slotDuration);
     const data = slots.map((slot) => new Object({
-        service: payLoad.service,
+        service: payLoad.serviceId,
         date: payLoad.date,
         startTime: slot.startTime,
         endTime: slot.endTime,
