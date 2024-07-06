@@ -31,10 +31,10 @@ const updateServiceToDB = async (id: string, payLoad: Partial<TService>) => {
   if (!isServiceExists) {
     throw new AppError(httpStatus.NOT_FOUND, "Not found any product");
   }
-  const result = await Service.findOneAndUpdate(
-    { _id: id },
-    { price: payLoad.price }
-  );
+  const result = await Service.findOneAndUpdate({ _id: id }, payLoad, {
+    new: true,
+    runValidators: true,
+  });
 
   return result;
 };

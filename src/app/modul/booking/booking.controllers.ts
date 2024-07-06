@@ -4,8 +4,7 @@ import catchAsync from "../../middleware/catchAsync";
 import { BookingService } from "./booking.service";
 
 const createBooking = catchAsync(async (req, res) => {
-  console.log(req.user);
-  const result = await BookingService.createBooking(req.body);
+  const result = await BookingService.createBooking(req.body, req.user.id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -22,18 +21,21 @@ const getAllBooking = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Service created successfully",
+    message: "All bookings retrieved successfully",
     data: result,
   });
 });
 
 const getMyBooking = catchAsync(async (req, res) => {
-  const result = await BookingService.getAllBooking();
+  const id = req.user.id;
+  console.log(id);
+
+  const result = await BookingService.getAllMyBooking(id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Service created successfully",
+    message: "User bookings retrieved successfully",
     data: result,
   });
 });

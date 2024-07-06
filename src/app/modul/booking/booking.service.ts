@@ -6,9 +6,7 @@ import { Booking } from "./booking.model";
 import { Service } from "../service/service.model";
 import mongoose from "mongoose";
 
-const createBooking = async (payload: TBookign) => {
-  //   payload.customer = userId;
-
+const createBooking = async (payload: TBookign, customerId: any) => {
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
@@ -35,7 +33,9 @@ const createBooking = async (payload: TBookign) => {
     if (!updateSlotStatus) {
       throw new AppError(httpStatus.NOT_FOUND, "Failed to creat booking!");
     }
-    console.log(payload);
+    payload.customer = customerId;
+
+    // const data = (payload. payload.customer: customerId)
     const newBooking = await Booking.create([payload], { session });
     if (!newBooking) {
       throw new AppError(httpStatus.NOT_FOUND, "Failed to creat booking!");
@@ -45,7 +45,8 @@ const createBooking = async (payload: TBookign) => {
     await session.endSession();
 
     return newBooking;
-  } catch (error: any) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: undefined | any) {
     await session.abortTransaction();
     await session.endSession();
     throw new Error(error);
@@ -61,7 +62,17 @@ const getAllBooking = async () => {
   return result;
 };
 
+const getAllMyBooking = async (id: string) => {
+  const result = await Booking.find({ customer: id })
+    .populate("customer")
+    .populate("serviceId")
+    .populate("slotId");
+
+  return result;
+};
+
 export const BookingService = {
   createBooking,
   getAllBooking,
+  getAllMyBooking,
 };

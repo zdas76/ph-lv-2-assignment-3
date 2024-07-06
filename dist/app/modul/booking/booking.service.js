@@ -19,8 +19,7 @@ const slot_model_1 = require("../slot/slot.model");
 const booking_model_1 = require("./booking.model");
 const service_model_1 = require("../service/service.model");
 const mongoose_1 = __importDefault(require("mongoose"));
-const createBooking = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    //   payload.customer = userId;
+const createBooking = (payload, customerId) => __awaiter(void 0, void 0, void 0, function* () {
     const session = yield mongoose_1.default.startSession();
     try {
         session.startTransaction();
@@ -36,7 +35,8 @@ const createBooking = (payload) => __awaiter(void 0, void 0, void 0, function* (
         if (!updateSlotStatus) {
             throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Failed to creat booking!");
         }
-        console.log(payload);
+        payload.customer = customerId;
+        // const data = (payload. payload.customer: customerId)
         const newBooking = yield booking_model_1.Booking.create([payload], { session });
         if (!newBooking) {
             throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Failed to creat booking!");
@@ -58,7 +58,15 @@ const getAllBooking = () => __awaiter(void 0, void 0, void 0, function* () {
         .populate("slotId");
     return result;
 });
+const getAllMyBooking = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield booking_model_1.Booking.find({ customer: id })
+        .populate("customer")
+        .populate("serviceId")
+        .populate("slotId");
+    return result;
+});
 exports.BookingService = {
     createBooking,
     getAllBooking,
+    getAllMyBooking,
 };

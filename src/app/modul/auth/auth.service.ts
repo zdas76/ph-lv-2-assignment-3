@@ -46,7 +46,7 @@ const loginUser = async (payLoad: TLoginUser) => {
   });
 
   return {
-    token: `Bearer ${token}`,
+    token,
     user,
   };
 };
