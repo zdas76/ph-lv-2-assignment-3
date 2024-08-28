@@ -55,7 +55,7 @@ const deleteServiceToDB = async (id: string) => {
 
 const createSlotInToDB = async (payLoad: TSlot) => {
   const isExsistService = await Service.findOne({
-    _id: payLoad.serviceId,
+    _id: payLoad.service,
     date: payLoad.date,
   });
 
@@ -73,7 +73,7 @@ const createSlotInToDB = async (payLoad: TSlot) => {
   const data = slots.map(
     (slot) =>
       new Object({
-        serviceId: payLoad.serviceId,
+        service: payLoad.service,
         date: payLoad.date,
         startTime: slot.startTime,
         endTime: slot.endTime,

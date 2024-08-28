@@ -11,7 +11,7 @@ const timeStringSchema = zod_1.z.string().refine((time) => {
 const slotSchemaZodValidation = zod_1.z.object({
     body: zod_1.z
         .object({
-        serviceId: zod_1.z.string(),
+        service: zod_1.z.string(),
         date: zod_1.z.string().date(),
         startTime: timeStringSchema,
         endTime: timeStringSchema,

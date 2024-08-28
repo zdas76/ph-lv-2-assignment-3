@@ -44,6 +44,7 @@ const createBooking = (payload, customerId) => __awaiter(void 0, void 0, void 0,
         yield session.commitTransaction();
         yield session.endSession();
         return newBooking;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }
     catch (error) {
         yield session.abortTransaction();

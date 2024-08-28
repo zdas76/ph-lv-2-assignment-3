@@ -4,6 +4,7 @@ import { SlotServices } from "./slot.service";
 import sendResponse from "../../Utiles/sendResponst";
 
 const gerAllSlots = catchAsync(async (req, res) => {
+  console.log(req.body);
   const result = await SlotServices.getAllSlotsFromBD(req.query);
 
   sendResponse(res, {

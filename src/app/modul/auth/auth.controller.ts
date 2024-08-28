@@ -15,19 +15,20 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 const loginUser = catchAsync(async (req, res) => {
+  console.log(req.body);
   const result = await AuthService.loginUser(req.body);
 
   // const newData = data;
 
   res.status(httpStatus.OK).json({
     success: true,
-    message: "User registered successfully",
+    message: "User logged in successfully",
     token: result.token,
     data: result.user,
   });
 });
 
-export const AotuControllers = {
+export const AuthControllers = {
   createUser,
   loginUser,
 };

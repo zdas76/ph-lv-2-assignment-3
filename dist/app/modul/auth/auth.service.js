@@ -47,7 +47,7 @@ const loginUser = (payLoad) => __awaiter(void 0, void 0, void 0, function* () {
         expiresIn: "5h",
     });
     return {
-        token: `Bearer ${token}`,
+        token,
         user,
     };
 });

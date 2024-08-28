@@ -6,6 +6,7 @@ import { Booking } from "./booking.model";
 import { Service } from "../service/service.model";
 import mongoose from "mongoose";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createBooking = async (payload: TBookign, customerId: any) => {
   const session = await mongoose.startSession();
   try {
@@ -37,6 +38,7 @@ const createBooking = async (payload: TBookign, customerId: any) => {
 
     // const data = (payload. payload.customer: customerId)
     const newBooking = await Booking.create([payload], { session });
+
     if (!newBooking) {
       throw new AppError(httpStatus.NOT_FOUND, "Failed to creat booking!");
     }

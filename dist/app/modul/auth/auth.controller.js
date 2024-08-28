@@ -31,7 +31,7 @@ const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
     // const newData = data;
     res.status(http_status_1.default.OK).json({
         success: true,
-        message: "User registered successfully",
+        message: "User logged in successfully",
         token: result.token,
         data: result.user,
     });

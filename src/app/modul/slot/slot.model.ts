@@ -3,7 +3,7 @@ import { TSlot } from "./slot.interface";
 
 const slotSchema = new Schema<TSlot>(
   {
-    serviceId: { type: Schema.Types.ObjectId, required: true, ref: "Service" },
+    service: { type: Schema.Types.ObjectId, required: true, ref: "Service" },
     date: { type: Date, reqquired: true },
     startTime: { type: String, required: true },
     endTime: { type: String, required: true },

@@ -1,4 +1,3 @@
-import { TUserRole } from "./../user/user.interfact";
 import express from "express";
 import validationRequest from "../../middleware/validationRequest";
 import { ServiceValidation } from "./service.validation";

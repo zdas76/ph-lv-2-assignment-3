@@ -18,6 +18,7 @@ const catchAsync_1 = __importDefault(require("../../middleware/catchAsync"));
 const slot_service_1 = require("./slot.service");
 const sendResponst_1 = __importDefault(require("../../Utiles/sendResponst"));
 const gerAllSlots = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body);
     const result = yield slot_service_1.SlotServices.getAllSlotsFromBD(req.query);
     (0, sendResponst_1.default)(res, {
         statusCode: http_status_1.default.OK,

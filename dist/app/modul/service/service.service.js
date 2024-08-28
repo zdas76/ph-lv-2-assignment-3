@@ -39,7 +39,10 @@ const updateServiceToDB = (id, payLoad) => __awaiter(void 0, void 0, void 0, fun
     if (!isServiceExists) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Not found any product");
     }
-    const result = yield service_model_1.Service.findOneAndUpdate({ _id: id }, { price: payLoad.price });
+    const result = yield service_model_1.Service.findOneAndUpdate({ _id: id }, payLoad, {
+        new: true,
+        runValidators: true,
+    });
     return result;
 });
 const deleteServiceToDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -52,7 +55,7 @@ const deleteServiceToDB = (id) => __awaiter(void 0, void 0, void 0, function* ()
 });
 const createSlotInToDB = (payLoad) => __awaiter(void 0, void 0, void 0, function* () {
     const isExsistService = yield service_model_1.Service.findOne({
-        _id: payLoad.serviceId,
+        _id: payLoad.service,
         date: payLoad.date,
     });
     if (isExsistService) {
@@ -61,7 +64,7 @@ const createSlotInToDB = (payLoad) => __awaiter(void 0, void 0, void 0, function
     const slotDuration = 60;
     const slots = yield (0, service_utils_1.generateTimeSlots)(payLoad.startTime, payLoad.endTime, slotDuration);
     const data = slots.map((slot) => new Object({
-        serviceId: payLoad.serviceId,
+        service: payLoad.service,
         date: payLoad.date,
         startTime: slot.startTime,
         endTime: slot.endTime,
