@@ -18,7 +18,7 @@ const sendResponst_1 = __importDefault(require("../../Utiles/sendResponst"));
 const catchAsync_1 = __importDefault(require("../../middleware/catchAsync"));
 const booking_service_1 = require("./booking.service");
 const createBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield booking_service_1.BookingService.createBooking(req.body, req.user.id);
+    const result = yield booking_service_1.BookingService.createBooking(req.body, req.user);
     (0, sendResponst_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
@@ -27,7 +27,6 @@ const createBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
     });
 }));
 const getAllBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("first", req.user);
     const result = yield booking_service_1.BookingService.getAllBooking();
     (0, sendResponst_1.default)(res, {
         statusCode: http_status_1.default.OK,
@@ -37,9 +36,8 @@ const getAllBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
     });
 }));
 const getMyBooking = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.user.id;
-    console.log(id);
-    const result = yield booking_service_1.BookingService.getAllMyBooking(id);
+    const { id } = req.user;
+    const result = yield booking_service_1.BookingService.getMyBooking(id);
     (0, sendResponst_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,

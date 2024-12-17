@@ -2,8 +2,7 @@ import { Types } from "mongoose";
 
 export type TBookign = {
   customer: Types.ObjectId;
-  serviceId: Types.ObjectId;
-  slotId: Types.ObjectId;
+  service: [{ serviceId: Types.ObjectId; slotId: Types.ObjectId }];
   vehicleType:
     | "car"
     | "SUV"
@@ -18,4 +17,8 @@ export type TBookign = {
   vehicleModel: string;
   manufacturingYear: number;
   registrationPlate: string;
+  total: number;
+  status: 'Pending' | 'Paid' | 'Shipped' | 'Completed' | 'Cancelled';
+  paymentStatus: 'Pending' | 'Paid' | 'Failed';
+  transactionId: string;
 };

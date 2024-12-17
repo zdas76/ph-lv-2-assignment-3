@@ -1,10 +1,10 @@
 import express from "express";
-import validationRequest from "../../middleware/validationRequest";
+import validationRequest from "../../../middleware/validationRequest";
 import { ServiceValidation } from "./service.validation";
 import { ServiceControllers } from "./service.controllers";
-import { slotSchemaValidation } from "../slot/slot.validation";
-import auth from "../../middleware/auth";
-import { USER_ROLE } from "../user/user.constants";
+import { slotSchemaValidation } from "../../slot/slot.validation";
+import auth from "../../../middleware/auth";
+import { USER_ROLE } from "../../user/user.constants";
 
 const routes = express.Router();
 
@@ -23,6 +23,7 @@ routes.post(
 );
 
 routes.get("/", ServiceControllers.getAllService);
+
 
 routes.get("/:id", ServiceControllers.getOneService);
 

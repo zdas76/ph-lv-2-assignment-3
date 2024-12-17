@@ -2,9 +2,12 @@ import httpStatus from "http-status";
 import sendResponse from "../../Utiles/sendResponst";
 import catchAsync from "../../middleware/catchAsync";
 import { BookingService } from "./booking.service";
+import { Request, Response } from "express";
+import { TAuthUser } from "../auth/auth.interfact";
 
-const createBooking = catchAsync(async (req, res) => {
-  const result = await BookingService.createBooking(req.body, req.user.id);
+const createBooking = catchAsync(async (req: Request & {user?:TAuthUser | unknown}, res:Response) => {
+  
+  const result = await BookingService.createBooking(req.body, req.user);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -25,10 +28,10 @@ const getAllBooking = catchAsync(async (req, res) => {
   });
 });
 
-const getMyBooking = catchAsync(async (req, res) => {
-  const id = req.user.id;
+const getMyBooking = catchAsync(async (req: Request & {user?:TAuthUser | unknown}, res:Response) => {
+  const {id} = req.user! ;
 
-  const result = await BookingService.getAllMyBooking(id);
+  const result = await BookingService.getMyBooking(id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

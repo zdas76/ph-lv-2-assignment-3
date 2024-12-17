@@ -15,11 +15,11 @@ const userSchema = new mongoose_1.Schema({
         required: [true, "Password Required"],
     },
     phone: { type: String, required: [true, "Phone number is required"] },
-    role: { type: String, enum: ["admin", "user"], default: "user" },
     address: {
         type: String,
         minlength: [10, "Address required minimum 50 characters"],
     },
+    role: { type: String, enum: ["admin", "user"], default: "user" },
 }, {
     toJSON: {
         transform: function (doc, ret) {

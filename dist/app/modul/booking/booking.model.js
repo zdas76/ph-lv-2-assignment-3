@@ -9,17 +9,21 @@ const bookingSchema = new mongoose_1.Schema({
         required: [true, "Customer id is required"],
         ref: "User",
     },
-    serviceId: {
-        type: mongoose_1.Schema.Types.ObjectId,
-        required: [true, "Service id is requried"],
-        ref: "Service",
-    },
-    slotId: {
-        type: mongoose_1.Schema.Types.ObjectId,
-        required: [true, "Slot is required"],
-        unique: true,
-        ref: "Slots",
-    },
+    service: [
+        {
+            serviceId: {
+                type: mongoose_1.Schema.Types.ObjectId,
+                required: [true, "Service id is requried"],
+                ref: "Service",
+            },
+            slotId: {
+                type: mongoose_1.Schema.Types.ObjectId,
+                required: [true, "Slot is required"],
+                unique: true,
+                ref: "Slots",
+            },
+        },
+    ],
     vehicleType: {
         type: String,
         enum: booking_constant_1.vehicleType,
@@ -29,6 +33,21 @@ const bookingSchema = new mongoose_1.Schema({
     vehicleModel: { type: String, required: true },
     manufacturingYear: { type: Number, required: true },
     registrationPlate: { type: String, required: true, unique: true },
+    total: { type: Number, required: true },
+    status: {
+        type: String,
+        enum: ['Pending', 'Paid', 'Shipped', 'Completed', 'Cancelled'],
+        default: 'Pending'
+    },
+    paymentStatus: {
+        type: String,
+        enum: ['Pending', 'Paid', 'Failed'],
+        default: 'Pending'
+    },
+    transactionId: {
+        type: String,
+        required: true
+    },
 }, {
     timestamps: true,
 });

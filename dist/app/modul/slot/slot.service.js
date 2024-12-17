@@ -11,12 +11,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SlotServices = void 0;
 const slot_model_1 = require("./slot.model");
-const getAllSlotsFromBD = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield slot_model_1.Slots.find({
-        $or: [{ date: query.date }, { serviceId: query.serviceId }],
-    }).populate("serviceId");
+// const getAllSlotsFromBD = async (query: Record<string, unknown>) => {
+//   const result = await Slots.find({
+//     $or: [{ date: query.date }, { serviceId: query.serviceId }],
+//   }).populate("serviceId");
+//   return result;
+// };
+const getAllSlotsFromBD = (payLoad) => __awaiter(void 0, void 0, void 0, function* () {
+    let condition = {};
+    if (payLoad.serviceId) {
+        condition = { service: payLoad.serviceId, date: payLoad.date, isBooked: "available" };
+    }
+    const result = yield slot_model_1.Slots.find(condition).populate("service");
+    return result;
+});
+const getSlotsDateByIdFromBD = (serviceId) => __awaiter(void 0, void 0, void 0, function* () {
+    const date = new Date();
+    const result = yield slot_model_1.Slots.find({ service: serviceId, date: { $gte: date } });
+    return result;
+});
+const deleteSlotsFormDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield slot_model_1.Slots.findByIdAndDelete(id);
     return result;
 });
 exports.SlotServices = {
     getAllSlotsFromBD,
+    deleteSlotsFormDB,
+    getSlotsDateByIdFromBD
 };

@@ -12,6 +12,5 @@ const auth_1 = __importDefault(require("../../middleware/auth"));
 const user_constants_1 = require("../user/user.constants");
 const route = express_1.default.Router();
 route.post("/", (0, auth_1.default)(user_constants_1.USER_ROLE.user), (0, validationRequest_1.default)(booking_validation_1.BookingValidation.createBookignValidation), booking_controllers_1.BookingController.createBooking);
-route.get("/", (0, auth_1.default)(user_constants_1.USER_ROLE.user), booking_controllers_1.BookingController.getMyBooking);
 route.get("/", (0, auth_1.default)(user_constants_1.USER_ROLE.admin), booking_controllers_1.BookingController.getAllBooking);
 exports.BookignRoutes = route;

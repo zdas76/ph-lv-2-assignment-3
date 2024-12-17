@@ -15,8 +15,8 @@ const slotSchema = new mongoose_1.Schema({
 }, {
     timestamps: true,
 });
-slotSchema.pre("find", function (next) {
-    this.find({ isBooked: { $ne: "booked" } });
-    next();
-});
+// slotSchema.pre("find", function (next) {
+//   this.find({ isBooked: { $ne: "booked" } });
+//   next();
+// });
 exports.Slots = (0, mongoose_1.model)("Slots", slotSchema);

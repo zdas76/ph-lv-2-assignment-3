@@ -14,8 +14,7 @@ route.post(
   BookingController.createBooking
 );
 
-route.get("/", auth(USER_ROLE.user), BookingController.getMyBooking);
-
 route.get("/", auth(USER_ROLE.admin), BookingController.getAllBooking);
+
 
 export const BookignRoutes = route;

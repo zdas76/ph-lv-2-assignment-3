@@ -58,6 +58,7 @@ const getOneService = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
 }));
 const updateService = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
+    
     const result = yield service_service_1.ServiceofService.updateServiceToDB(id, req.body);
     (0, sendResponst_1.default)(res, {
         statusCode: http_status_1.default.OK,

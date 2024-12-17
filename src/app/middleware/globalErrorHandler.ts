@@ -9,7 +9,6 @@ import { TErrorSources } from "../interface/error";
 import config from "../config";
 
 const globalErrorHandaler: ErrorRequestHandler = (error, req, res) => {
-  console.log(error);
   let statusCode = 500;
   let message = "Something went wrong";
   let errorSources: TErrorSources = [
@@ -36,7 +35,7 @@ const globalErrorHandaler: ErrorRequestHandler = (error, req, res) => {
     errorSources = simplifedError?.errorSources;
   } else if (error.code === 11000) {
     const simplifedError = handleDuplicateError(error);
-    statusCode = simplifedError?.statusCode;
+    statusCode = simplifedError?.statusCode || 500;
     message = simplifedError?.message;
     errorSources = simplifedError?.errorSources;
   } else if (error instanceof AppError) {

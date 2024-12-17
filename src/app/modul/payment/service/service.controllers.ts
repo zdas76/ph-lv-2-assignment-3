@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
-import sendResponse from "../../Utiles/sendResponst";
-import catchAsync from "../../middleware/catchAsync";
+import sendResponse from "../../../Utiles/sendResponst";
+import catchAsync from "../../../middleware/catchAsync";
 import { ServiceofService } from "./service.service";
 
 // Create Service
@@ -17,6 +17,7 @@ const createService = catchAsync(async (req, res) => {
 
 // Create Slots
 const createSlots = catchAsync(async (req, res) => {
+  
   const result = await ServiceofService.createSlotInToDB(req.body);
 
   sendResponse(res, {
@@ -38,6 +39,7 @@ const getAllService = catchAsync(async (req, res) => {
   });
 });
 
+
 const getOneService = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await ServiceofService.getOneServiceFromDB(id);
@@ -52,8 +54,7 @@ const getOneService = catchAsync(async (req, res) => {
 
 const updateService = catchAsync(async (req, res) => {
   const { id } = req.params;
-
-  const result = await ServiceofService.updateServiceToDB(id, req.body);
+const result = await ServiceofService.updateServiceToDB(id, req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

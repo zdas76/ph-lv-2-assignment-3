@@ -10,5 +10,6 @@ const notFound = (req, res, next) => {
         statusCode: 404,
         message: "Not Found",
     });
+    next();
 };
 exports.default = notFound;

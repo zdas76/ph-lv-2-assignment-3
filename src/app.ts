@@ -14,6 +14,7 @@ app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
+    optionsSuccessStatus:200,
   })
 );
 
@@ -23,9 +24,12 @@ app.get("/", (req, res) => {
   res.send("Welcome to Car Wash Booking System");
 });
 
-app.use(globalErrorHandaler);
-
 // Not Found
 app.use(notFound);
+
+
+app.use(globalErrorHandaler);
+
+
 
 export default app;

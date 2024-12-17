@@ -15,6 +15,7 @@ const ServiceSchema = new mongoose_1.Schema({
     },
     price: { type: Number, required: true },
     duration: { type: Number, required: true },
+    image: { type: String, required: true },
     isDeleted: { type: Boolean, default: false },
 }, { timestamps: true });
 ServiceSchema.pre("find", function (next) {

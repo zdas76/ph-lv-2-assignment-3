@@ -10,8 +10,7 @@ const handleCastError_1 = __importDefault(require("../error/handleCastError"));
 const handleDuplicateError_1 = __importDefault(require("../error/handleDuplicateError"));
 const AppError_1 = __importDefault(require("../error/AppError"));
 const config_1 = __importDefault(require("../config"));
-const globalErrorHandaler = (error, req, res, next) => {
-    console.log(error);
+const globalErrorHandaler = (error, req, res) => {
     let statusCode = 500;
     let message = "Something went wrong";
     let errorSources = [
@@ -40,7 +39,7 @@ const globalErrorHandaler = (error, req, res, next) => {
     }
     else if (error.code === 11000) {
         const simplifedError = (0, handleDuplicateError_1.default)(error);
-        statusCode = simplifedError === null || simplifedError === void 0 ? void 0 : simplifedError.statusCode;
+        statusCode = (simplifedError === null || simplifedError === void 0 ? void 0 : simplifedError.statusCode) || 500;
         message = simplifedError === null || simplifedError === void 0 ? void 0 : simplifedError.message;
         errorSources = simplifedError === null || simplifedError === void 0 ? void 0 : simplifedError.errorSources;
     }

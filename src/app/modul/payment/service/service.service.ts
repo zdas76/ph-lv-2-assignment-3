@@ -1,10 +1,11 @@
 import httpStatus from "http-status";
-import AppError from "../../error/AppError";
+import AppError from "../../../error/AppError";
 import { TService } from "./service.interface";
 import { Service } from "./service.model";
-import { Slots } from "../slot/slot.model";
-import { TSlot } from "../slot/slot.interface";
+import { Slots } from "../../slot/slot.model";
+import { TSlot } from "../../slot/slot.interface";
 import { generateTimeSlots } from "./service.utils";
+// import { sendImageToCloudinary } from "../../Utiles/imagetoCloudinary";
 
 const createServiceInToDB = async (payLoad: TService) => {
   const isExsistService = await Service.findOne({ name: payLoad.name });
@@ -54,6 +55,7 @@ const deleteServiceToDB = async (id: string) => {
 };
 
 const createSlotInToDB = async (payLoad: TSlot) => {
+  
   const isExsistService = await Service.findOne({
     _id: payLoad.service,
     date: payLoad.date,

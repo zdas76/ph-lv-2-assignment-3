@@ -44,7 +44,7 @@ const loginUser = (payLoad) => __awaiter(void 0, void 0, void 0, function* () {
         id: user.id,
     };
     const token = jsonwebtoken_1.default.sign(jwtPayload, config_1.default.access_secret, {
-        expiresIn: "5h",
+        expiresIn: "3d",
     });
     return {
         token,

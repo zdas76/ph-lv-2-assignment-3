@@ -18,6 +18,7 @@ const AppError_1 = __importDefault(require("../../error/AppError"));
 const service_model_1 = require("./service.model");
 const slot_model_1 = require("../slot/slot.model");
 const service_utils_1 = require("./service.utils");
+// import { sendImageToCloudinary } from "../../Utiles/imagetoCloudinary";
 const createServiceInToDB = (payLoad) => __awaiter(void 0, void 0, void 0, function* () {
     const isExsistService = yield service_model_1.Service.findOne({ name: payLoad.name });
     if (isExsistService) {

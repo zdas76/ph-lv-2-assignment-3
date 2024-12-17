@@ -1,6 +1,5 @@
 import { User } from "./../user/user.model";
 import { TUser } from "../user/user.interfact";
-
 import { TLoginUser } from "./auth.interfact";
 import AppError from "../../error/AppError";
 import httpStatus from "http-status";
@@ -42,7 +41,7 @@ const loginUser = async (payLoad: TLoginUser) => {
     id: user.id,
   };
   const token = jwt.sign(jwtPayload, config.access_secret as string, {
-    expiresIn: "5h",
+    expiresIn: "3d",
   });
 
   return {
